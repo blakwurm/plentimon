@@ -1,6 +1,6 @@
 * {
     color: white;
-    font-family: 'GrundschriftRegular';
+    font-family: 'UniqueRegular';
     margin: 0;
     padding: 0;
 }
@@ -10,24 +10,27 @@ body {
 }
 
 #pagetitle {
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
     position: absolute;
-    left: 50px;
-    top: 30px;
-    margin-right: 140px;
+    left: 45px;
+    top: 35px;
+    width: calc(100% - 170px);
     overflow: hidden;
     max-height: 1em;
-    height: 40px;
+    height: 80px;
 }
 
 #console, #dicereadout {
-    border: solid 3px;
-    padding: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 40vh;
+    border: solid 3px transparent;
     margin-bottom: -1px;
-    padding-top: 80px;
-    width: calc(100% - 6px - 80px);
-    height: calc(50vh - 120px);
+    padding-top: 72px;
+    height: calc(35vh);
     display: block;
     border-image: url('/img/console_border.svg');
     border-image-slice: 38 45 23 33 fill;
@@ -49,27 +52,39 @@ body {
 }
 
 #input {
+    position: absolute;
+    top: 40vh;
+    padding: 40px;
     color: black;
     border: solid 3px white;
     border-image: url('/img/button_border.svg');
     border-image-slice: 45 fill;
     border-image-width: 45;
     margin: 0px;
-    margin-top: -50px;
-    padding: 50px;
-    height: calc(50vh - 20px - 50px);
-    width: calc(100% - 110px);
+    padding-bottom: 0;
+    height: calc(50vh + 70px - 60px);
+    width: calc(100% - 20px - 80px);
+    overflow: scroll;
+}
+
+#input * {
+    color: black;
 }
 
 #dicereadout {
     text-align: center;
 }
 
-#dicereadout ul {
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
+#dicereadout #dicelist {
+    display: grid;
+    height: 30vh;
+    width:80vw;
+    margin: 0 10vw;
     list-style: none;
+    text-align: center;
+    grid-template-columns: repeat(auto-fill, 40px);
+    grid-template-rows: repeat(auto-fill, 40px);
+    overflow-y: scroll;
 }
 
 #dicereadout .die {
@@ -81,7 +96,7 @@ body {
     background-color: transparent;
     overflow: visible;
     border: none;
-    width: 15vmin;
+    width: 100%;
     text-align: center;
 }
 #dicereadout .die:before {
@@ -90,10 +105,105 @@ body {
     padding-top: 100%;
 }
 #dicereadout .die p {
-    font-size: 5.5vmin;
+    font-size: 200%;
     position: absolute;
-    top: 33%;
+    top: 18%;
     left: 0;
     bottom: 0;
     right: 0;
+    text-shadow: 0px 0px 3px red;
+}
+
+#input .segment {
+    text-align: center;
+    margin-left: -10vw;
+}
+
+#input .segment label {
+    margin: 3px;
+}
+#input .segment .direct-input {
+    border: none;
+    border-bottom: 2px gold solid;
+    background: none;
+    font-size: 200%;
+    text-align: center;
+}
+#input .segment .acceso-range {
+    position: fixed;
+    top: 64vh;
+    right: -10vh;
+    transform: rotate(-90deg);
+    display: flex;
+    width: 40vh;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    height: 3em;
+}
+
+#input .segment .acceso-range .incdec {
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    background: none;
+    border: 3px solid gold;
+    font-size: 100%;
+    transform: rotate(90deg);
+}
+#input .segment .acceso-range input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background: none;
+    border: 3px dashed gold;
+}
+#input .segment .acceso-range input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-image: url('/img/goldthumb.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0px 0px 5px black;
+}
+
+#input .segment #rollbutton {
+    width: 50vw;
+    height: 30px;
+    background: red;
+    color: black;
+    border: 6px double gold;
+}
+
+button {
+    box-shadow: 0px 0px 5px black;
+}
+
+#select-mode-picker, #tricklist, #reroll-list {
+    list-style: none;
+}
+
+#select-mode-picker li, #tricklist li, #reroll-list li {
+    display: inline-block;
+}
+
+#select-mode-picker button {
+    margin: 3px;
+    width: 30vw;
+}
+
+#tricklist li button {
+    margin: 3px;
+    padding: 3px;
+    background: red;
+    border: 4px double gold;
+}
+
+#reroll-list li label {
+    display: block;
+    margin: 0;
+    margin-botom: -4px;
 }
