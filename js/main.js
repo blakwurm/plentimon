@@ -17,6 +17,14 @@ function mod(mod_fn) {
     }
 }
 
+function roll_the_dice(appstate) {
+    return function() {
+        let the_roll = rolldice(appstate.roll_number);
+        appstate.roll = the_roll
+        render_page()
+    }
+}
+
 let roll_line = (rollobj) => html`
 <p>${rollobj.timestamp.getHours()}:${rollobj.timestamp.getMinutes()}:${rollobj.timestamp.getSeconds()}
     || ${rollobj.successes} successes rolling ${rollobj.rolls.join(', ')}, with double ${rollobj.double} rerolling ${rollobj.reroll}</p>
@@ -88,7 +96,7 @@ let mainpage = (appstate) => html`
     <ul id="inputlist">
         <li>
             <div class="segment">
-                <button @click='${mod(() => appstate.roll = rolldice(10))}' id="rollbutton">ROLL</button>
+                <button @click=${roll_the_dice(appstate)} id="rollbutton">ROLL</button>
             </div>
         </li>
         <li>
