@@ -142,5 +142,8 @@ let mainpage = (appstate) => html`
 </div>
 `
 
+function render_page() {
+    render(mainpage(makeappstate(current_rolls)), document.querySelector("#pagecontent"))
+}
 
-render(mainpage(makeappstate(current_rolls)), document.querySelector("#pagecontent"))
+render_page()
