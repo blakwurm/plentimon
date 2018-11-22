@@ -14,14 +14,22 @@ let roll_line = (rollobj) => html`
 `
 
 
-
-
-let mainpage = (appstate) => html`
+let the_console = (appstate) => html`
 <div id="console">
     ${appstate.rolls.map(roll_line)}
 </div>
+`
+
+let mainpage = (appstate) => html`
+<div id="dicereadout">
+    <ul>
+        <li><button class="die"><p>6</p></button></li>
+        <li><button class="die"><p>10</p></button></li>
+    
+    </ul>
+</div>
 <div id="input">
-    booya!
+    <label>Range</label><input type="range" min="1" max="30">
 </div>
 `
 

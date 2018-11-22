@@ -1,6 +1,6 @@
 * {
     color: white;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'GrundschriftRegular';
     margin: 0;
     padding: 0;
 }
@@ -18,9 +18,10 @@ body {
     margin-right: 140px;
     overflow: hidden;
     max-height: 1em;
+    height: 40px;
 }
 
-#console {
+#console, #dicereadout {
     border: solid 3px;
     padding: 40px;
     margin-bottom: -1px;
@@ -31,7 +32,15 @@ body {
     border-image: url('/img/console_border.svg');
     border-image-slice: 38 45 23 33 fill;
     border-image-width: 38 45 23 33;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+
+#dicereadout {
+    overflow: hidden;
+}
+
+#console ::scrollbar {
+    width: 0px;
 }
 
 #console * {
@@ -43,12 +52,48 @@ body {
     color: black;
     border: solid 3px white;
     border-image: url('/img/button_border.svg');
-    border-image-slice: 10 45 30 15 fill;
-    border-image-width: 10 45 23 15;
+    border-image-slice: 45 fill;
+    border-image-width: 45;
     margin: 0px;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 50px;
+    margin-top: -50px;
+    padding: 50px;
     height: calc(50vh - 20px - 50px);
-    width: calc(100% - 105px);
+    width: calc(100% - 110px);
+}
+
+#dicereadout {
+    text-align: center;
+}
+
+#dicereadout ul {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    list-style: none;
+}
+
+#dicereadout .die {
+    position: relative;
+    background-image: url('/img/d10.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    overflow: visible;
+    border: none;
+    width: 15vmin;
+    text-align: center;
+}
+#dicereadout .die:before {
+    content: "";
+    display:block;
+    padding-top: 100%;
+}
+#dicereadout .die p {
+    font-size: 5.5vmin;
+    position: absolute;
+    top: 33%;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
