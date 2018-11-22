@@ -25,6 +25,12 @@ function roll_the_dice(appstate) {
     }
 }
 
+function set_roll_number(appstate, new_number) {
+    console.log('setting number to ' + new_number);
+    appstate.roll_number = new_number;
+    render_page();
+}
+
 let roll_line = (rollobj) => html`
 <p>${rollobj.timestamp.getHours()}:${rollobj.timestamp.getMinutes()}:${rollobj.timestamp.getSeconds()}
     || ${rollobj.successes} successes rolling ${rollobj.rolls.join(', ')}, with double ${rollobj.double} rerolling ${rollobj.reroll}</p>
@@ -104,9 +110,9 @@ let mainpage = (appstate) => html`
         <label>Dice to Roll</label>
         <input class="direct-input" type="number" min=1 max=30 value="${appstate.roll_number}">
         <div class="acceso-range">
-            <button class="incdec" type="button">-</button>
+            <button class="incdec" type="button" @click='${() => set_roll_number(appstate, appstate.roll_number - 1)}'>-</button>
             <input type="range" min=1 max=30 value="${appstate.roll_number}">
-            <button class="incdec" type="button">+</button>
+            <button class="incdec" type="button" @click='${() => set_roll_number(appstate, appstate.roll_number + 1)}'>+</button>
         </div>
     </div>
         </li>
