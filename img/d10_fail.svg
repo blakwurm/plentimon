@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <filter id="a" x="0" width="1.1" y="0" height="1.1" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="b" x="0" width="1.1" y="0" height="1.1" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="c" x="0" width="1.1" y="-.2" height="1.3" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+    <filter id="d" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+  </defs>
+  <g fill="none" stroke="#f01" stroke-width="1.7">
+    <path d="M50 3.3L15.6 63.5 50 80.7l34.4-17.2z" transform="matrix(.93023 0 0 .93023 3.5 3.5)" opacity=".4" filter="url(#a)"/>
+    <path d="M50 3.3l-43 43v17.2L50 98l43-34.4V46.3z" transform="matrix(.93023 0 0 .93023 3.5 3.5)" opacity=".4" filter="url(#b)"/>
+    <path d="M7 63.5h8.6L50 80.7l34.4-17.2H93" transform="matrix(.93023 0 0 .93023 3.5 3.5)" opacity=".4" filter="url(#c)"/>
+    <path d="M50 98V80.6" transform="matrix(.93023 0 0 .93023 3.5 3.5)" opacity=".4" filter="url(#d)"/>
+  </g>
+  <g fill="none" stroke="#f01" stroke-width="1.6">
+    <path d="M50 6.6l-32 56 32 16 32-16z"/>
+    <path d="M50 6.6l-40 40v16l40 32 40-32v-16z"/>
+    <path d="M10 62.6h8l32 16 32-16h8M50 94.6v-16"/>
+  </g>
+</svg>

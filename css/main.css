@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
 body {
     background-color: black;
 }
@@ -61,10 +65,15 @@ body {
     border-image-slice: 45 fill;
     border-image-width: 45;
     margin: 0px;
-    padding-bottom: 0;
-    height: calc(50vh + 70px - 60px);
-    width: calc(100% - 20px - 80px);
-    overflow: scroll;
+    padding-bottom: 70px;
+    height: calc(50vh + 70px - 180px);
+    width: calc(100% - 20px - 70px);
+}
+
+#input #inputlist {
+    overflow-y: scroll;
+    height: 100%;
+    list-style: none;
 }
 
 #input * {
@@ -89,7 +98,7 @@ body {
 
 #dicereadout .die {
     position: relative;
-    background-image: url('/img/d10.svg');
+    background-image: url('/img/d10_fail.svg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -98,6 +107,13 @@ body {
     border: none;
     width: 100%;
     text-align: center;
+}
+#dicereadout .die.success {
+    background-image: url('/img/d10.svg');
+}
+
+#dicereadout .die.success.double {
+    background-image: url('/img/d10_double_raw.svg');
 }
 #dicereadout .die:before {
     content: "";
@@ -114,9 +130,16 @@ body {
     text-shadow: 0px 0px 3px red;
 }
 
+#dicereadout .die.selected {
+    border: 1px dashed goldenrod;
+    border-radius: 100px;
+    background-color: rgba(255, 0, 0, .2)
+}
+
 #input .segment {
     text-align: center;
-    margin-left: -10vw;
+    border-bottom: 3px double gold;
+    padding: 10px 0;
 }
 
 #input .segment label {
@@ -130,12 +153,9 @@ body {
     text-align: center;
 }
 #input .segment .acceso-range {
-    position: fixed;
     top: 64vh;
     right: -10vh;
-    transform: rotate(-90deg);
     display: flex;
-    width: 40vh;
     align-items: center;
     align-self: center;
     justify-content: center;
@@ -149,7 +169,6 @@ body {
     background: none;
     border: 3px solid gold;
     font-size: 100%;
-    transform: rotate(90deg);
 }
 #input .segment .acceso-range input {
     appearance: none;
@@ -182,11 +201,12 @@ button {
     box-shadow: 0px 0px 5px black;
 }
 
-#select-mode-picker, #tricklist, #reroll-list {
+#select-mode-picker, #tricklist, .dice-number-selector {
     list-style: none;
+    margin: 0 -5px;
 }
 
-#select-mode-picker li, #tricklist li, #reroll-list li {
+#select-mode-picker li, #tricklist li, .dice-number-selector li {
     display: inline-block;
 }
 
@@ -202,8 +222,85 @@ button {
     border: 4px double gold;
 }
 
-#reroll-list li label {
+.dice-number-selector li {
+    margin: 0 1.5px;
+}
+
+.dice-number-selector li label {
     display: block;
     margin: 0;
-    margin-botom: -4px;
+    margin-bottom: -4px;
+}
+
+@media (orientation:landscape) {
+    #pagetitle {
+        display: block;
+        font-size: 30px;
+        text-align: center;
+        position: fixed;
+        transform: rotate(180deg);
+        writing-mode: tb;
+        top: 130px;
+        left: 35px;
+        bottom: 70px;
+        width: 30px;
+        height: calc(100vh - 170px);
+        max-height: 100vh;
+    }
+    #console, #dicereadout {
+        position: absolute;
+        top: 0;
+        right: 45vw;
+        left: 0;
+        bottom: 0;
+        height: auto;
+        border: solid 3px transparent;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-bottom: -1px;
+        display: block;
+        border-image: url('/img/console_border_sideways.svg');
+        border-image-slice: 45 fill;
+        border-image-width: 45;
+        overflow-y: scroll;
+        padding-left: 20px;
+    }
+    #dicereadout #dicelist {
+        height: calc(100vh - 59px);
+        display: grid;
+        padding: 0;
+        margin: 0;
+        margin-left: 65px;
+        margin-top: 27px;
+        width: 35vw;
+        text-align: right;
+        list-style: none;
+        grid-template-rows: repeat(auto-fill, 40px);
+        grid-template-columns: repeat(auto-fill, 40px);
+        overflow-y: scroll;
+    }
+    #input {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        left: 49vw;
+        bottom: 10px;
+        width: auto;
+        height: auto;
+        padding: 40px;
+        color: black;
+        border: solid 3px white;
+        border-image: url('/img/button_border_sideways.svg');
+        border-image-slice: 45 fill;
+        border-image-width: 45;
+        margin: 0px;
+        padding-right: 70px;
+    }
+    #input .segment #rollbutton {
+        width: 25vw;
+        height: 30px;
+        background: red;
+        color: black;
+        border: 6px double gold;
+    }
 }
