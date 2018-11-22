@@ -139,7 +139,9 @@ body {
 #input .segment {
     text-align: center;
     border-bottom: 3px double gold;
+    width: 90%;
     padding: 10px 0;
+    margin: 0 auto;
 }
 
 #input .segment label {
@@ -173,7 +175,7 @@ body {
 #input .segment .acceso-range input {
     appearance: none;
     -webkit-appearance: none;
-    width: 100%;
+    width: 90%;
     height: 3px;
     background: none;
     border: 3px dashed gold;
