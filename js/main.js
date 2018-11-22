@@ -88,7 +88,7 @@ let mainpage = (appstate) => html`
     <ul id="inputlist">
         <li>
             <div class="segment">
-                ${html`<button @click='${mod(() => appstate.roll = rolldice(10))}' id="rollbutton">ROLL</button>`}
+                <button @click='${mod(() => appstate.roll = rolldice(10))}' id="rollbutton">ROLL</button>
             </div>
         </li>
         <li>
