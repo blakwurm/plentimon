@@ -3,6 +3,8 @@ import { rolldice } from './rolldice.js'
 
 let appstate = {
     roll_number: 3,
+    min_dice: 1,
+    max_dice: 30,
     success: new Set([10, 9, 8, 7]),
     double: new Set([10]),
     selected: new Set([0, 3, 4]),
@@ -26,7 +28,7 @@ function roll_the_dice(appstate) {
 }
 
 function set_roll_number(appstate, new_number) {
-    console.log('setting number to ' + new_number);
+    new_number = Math.min(appstate.max_dice, Math.max(appstate.min_dice, new_number))
     appstate.roll_number = new_number;
     render_page();
 }
@@ -111,7 +113,7 @@ let mainpage = (appstate) => html`
         <input class="direct-input" type="number" min=1 max=30 value="${appstate.roll_number}">
         <div class="acceso-range">
             <button class="incdec" type="button" @click='${() => set_roll_number(appstate, appstate.roll_number - 1)}'>-</button>
-            <input type="range" min=1 max=30 value="${appstate.roll_number}">
+            <input type="range" min='${appstate.min_dice}' max='${appstate.max_dice}' value="${appstate.roll_number}" @input='${(e) => set_roll_number(appstate, e.target.value)}'>
             <button class="incdec" type="button" @click='${() => set_roll_number(appstate, appstate.roll_number + 1)}'>+</button>
         </div>
     </div>
@@ -162,7 +164,7 @@ let mainpage = (appstate) => html`
 </div>
 `
 
-function render_page() {
+async function render_page() {
     render(mainpage(appstate), document.querySelector("#pagecontent"))
 }
 
