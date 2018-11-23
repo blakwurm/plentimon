@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/lit-html?module'
-import { rolldice, countsuccesses } from './rolldice.js'
+import { rolldice, countsuccesses, reroll_once } from './rolldice.js'
 
 let appstate = {
     roll_number: 3,
@@ -9,7 +9,8 @@ let appstate = {
     double: new Set([10]),
     selected: new Set([]),
     roll: rolldice(10),
-    select_mode: "multiple"
+    select_mode: "multiple",
+    roll_in: new Set([])
 }
 
 function mod(mod_fn) {
@@ -115,7 +116,7 @@ function toggle_selected_die(appstate, roll_index) {
 }
 
 let make_die_li_fn = (appstate) => (roll_index) => html`
-<li><button class="die ${make_selected_flag(appstate, roll_index)} ${make_result_flag(appstate, roll_index)}" type="button" @click='${toggle_selected_die(appstate, roll_index)}'>
+<li><button id="${Math.random()}" class="die ${make_selected_flag(appstate, roll_index)} ${make_result_flag(appstate, roll_index)}" type="button" @click='${toggle_selected_die(appstate, roll_index)}'>
         <p>${appstate.roll[roll_index]}</p>
     </button>
 </li>
@@ -123,9 +124,33 @@ let make_die_li_fn = (appstate) => (roll_index) => html`
 
 let make_dicelist = (appstate) => html`
 <ul id="dicelist">
-    ${[...Array(appstate.roll.length).keys()].map(make_die_li_fn(appstate))}
+    ${[...Array(appstate.roll.length).keys()].filter((x, ind) => !appstate.roll_in.has(ind)).map(make_die_li_fn(appstate))}
 </ul>
 `
+
+function reroll_button_press(appstate) {
+    return function () {
+        let actual_selected = null;
+        let selected_rolls = new Set([...appstate.selected].map((select_ind) => appstate.roll[select_ind]));
+        if (appstate.select_mode === "multiple") {
+            actual_selected = new Set(appstate.selected);
+            for (let ind of appstate.roll.keys()) {
+                let roll = appstate.roll[ind];
+                if (selected_rolls.has(roll)) {
+                    actual_selected.add(ind);
+                }
+        }
+        } else {
+            actual_selected = appstate.selected
+        }
+        console.log(actual_selected);
+        console.log(appstate.roll);
+        appstate.roll = reroll_once(actual_selected, appstate.roll);
+        appstate.selected.clear();
+        render_page();
+        return appstate;
+    }
+}
 
 let mainpage = (appstate) => html`
 <div id="successesreadout">${countsuccesses(appstate.success, appstate.double, appstate.roll)}</div>
@@ -137,6 +162,7 @@ let mainpage = (appstate) => html`
         <li>
             <div class="segment">
                 <button @click=${roll_the_dice(appstate)} id="rollbutton">ROLL</button>
+                <button @click=${reroll_button_press(appstate)} id="rerollbutton">REROLL selected</button>
             </div>
         </li>
         <li>
@@ -177,27 +203,22 @@ let mainpage = (appstate) => html`
         </ul>
     </div>
         </li>
-        <li>
-    <div class="segment">
-        <label>Dice Tricks (With Selected Dice)</label>
-        <ul id="tricklist">
-            <li>
-                <button class="trick">Reroll X's</button>
-            </li>
-            <li>
-                <button class="trick">Reroll X's Until Gone</button>
-            </li>
-        </ul>
-    </div>
-
-        </li>
     </ul>
 </div>
 </div>
 `
+async function roll_in_dice(appstate) {
+    if (appstate.roll_in.size != 0) {
+        setTimeout(function () {
+            appstate.roll_in.delete(appstate.roll_in.values().next().value);
+            render_page();
+        }, 500);
+    }
+}
 
 async function render_page() {
-    render(mainpage(appstate), document.querySelector("#pagecontent"))
+    render(mainpage(appstate), document.querySelector("#pagecontent"));
+    roll_in_dice(appstate);
 }
 
 render_page()

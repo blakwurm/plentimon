@@ -18,4 +18,10 @@ function countsuccesses(success_set, double_set, roll_vec) {
     return roll_vec.map(countroll).reduce((a, b) => a + b)
 }
 
-export {rolldice, countsuccesses}
+function reroll_once(selected_set, roll_vec) {
+    let new_rolls = roll_vec.map((roll, ind) => selected_set.has(ind) ? roll_a_d10() : roll)
+    new_rolls.sort((x, y) => y - x);
+    return new_rolls
+}
+
+export {rolldice, countsuccesses, reroll_once}
