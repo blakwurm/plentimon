@@ -134,7 +134,7 @@ let make_dicelist = (appstate) => html`
 
 function reroll_button_press(appstate) {
     return function () {
-        let actual_selected = null;
+        let actual_selected = appstate.selected;
         let selected_rolls = new Set([...appstate.selected].map((select_ind) => appstate.roll[select_ind]));
         if (appstate.select_mode === "multiple") {
             actual_selected = new Set(appstate.selected);
@@ -143,15 +143,13 @@ function reroll_button_press(appstate) {
                 if (selected_rolls.has(roll)) {
                     actual_selected.add(ind);
                 }
-        }
-        } else {
-            actual_selected = appstate.selected
+            }
         }
         console.log(actual_selected);
         console.log(appstate.roll);
         appstate.roll = reroll_once(actual_selected, appstate.roll);
         appstate.selected.clear();
-        appstate.roll_in = actual_selected;
+        appstate.roll_in = new Set(actual_selected);
         render_page();
         return appstate;
     }
@@ -236,7 +234,7 @@ async function roll_in_dice(appstate) {
             appstate.roll_in.delete([...appstate.roll_in.values()][roll_a_dx(appstate.roll_in.size)]);
             render_page();
         }, 
-        200);
+        (100));
     }
 }
 
