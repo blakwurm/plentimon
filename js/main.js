@@ -24,7 +24,9 @@ function roll_the_dice(appstate) {
     return function() {
         let the_roll = rolldice(appstate.roll_number);
         appstate.roll = the_roll
-        render_page()
+        appstate.roll_in = new Set(the_roll.keys());
+        console.log(appstate.roll_in);
+        render_page();
     }
 }
 
@@ -116,7 +118,8 @@ function toggle_selected_die(appstate, roll_index) {
 }
 
 let make_die_li_fn = (appstate) => (roll_index) => html`
-<li><button id="${Math.random()}" class="die ${make_selected_flag(appstate, roll_index)} ${make_result_flag(appstate, roll_index)}" type="button" @click='${toggle_selected_die(appstate, roll_index)}'>
+<li><button id="${Math.random()}" class="${!appstate.roll_in.has(roll_index) ? 'die' : 'shadowdie'}
+ ${make_selected_flag(appstate, roll_index)} ${make_result_flag(appstate, roll_index)}" type="button" @click='${toggle_selected_die(appstate, roll_index)}'>
         <p>${appstate.roll[roll_index]}</p>
     </button>
 </li>
@@ -124,7 +127,7 @@ let make_die_li_fn = (appstate) => (roll_index) => html`
 
 let make_dicelist = (appstate) => html`
 <ul id="dicelist">
-    ${[...Array(appstate.roll.length).keys()].filter((x, ind) => !appstate.roll_in.has(ind)).map(make_die_li_fn(appstate))}
+    ${[...Array(appstate.roll.length).keys()].map(make_die_li_fn(appstate))}
 </ul>
 `
 
@@ -210,9 +213,10 @@ let mainpage = (appstate) => html`
 async function roll_in_dice(appstate) {
     if (appstate.roll_in.size != 0) {
         setTimeout(function () {
-            appstate.roll_in.delete(appstate.roll_in.values().next().value);
+            console.log(appstate.roll_in);
+            appstate.roll_in.delete([...appstate.roll_in.values()].reverse()[0]);
             render_page();
-        }, 500);
+        }, 200);
     }
 }
 
@@ -221,4 +225,4 @@ async function render_page() {
     roll_in_dice(appstate);
 }
 
-render_page()
+roll_the_dice(appstate)();

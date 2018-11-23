@@ -111,6 +111,18 @@ body {
     overflow-y: scroll;
 }
 
+#dicereadout #dicelist .shadowdie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -99;
+    display: hidden;
+    width: 0;
+    height: 0;
+    grid-row: 0/1;
+    grid-column: 0/1;
+}
+
 #dicereadout .die {
     position: relative;
     background-image: url('/img/d10_fail.svg');
