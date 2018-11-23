@@ -10,7 +10,8 @@ let appstate = {
     selected: new Set([]),
     roll: rolldice(10),
     select_mode: "multiple",
-    roll_in: new Set([])
+    roll_in: new Set([]),
+    display_successes: true
 }
 
 function mod(mod_fn) {
@@ -150,13 +151,15 @@ function reroll_button_press(appstate) {
         console.log(appstate.roll);
         appstate.roll = reroll_once(actual_selected, appstate.roll);
         appstate.selected.clear();
+        appstate.roll_in = actual_selected;
         render_page();
         return appstate;
     }
 }
 
 let mainpage = (appstate) => html`
-<div id="successesreadout">${countsuccesses(appstate.success, appstate.double, appstate.roll)}</div>
+${appstate.display_successes ? html`<div id="successesreadout">${countsuccesses(appstate.success, appstate.double, appstate.roll)}</div>` : ''}
+
 <div id="dicereadout">
     ${make_dicelist(appstate)}
 </div>
@@ -194,7 +197,7 @@ let mainpage = (appstate) => html`
         <li>
     <div class="segment">
         <label>Select Mode</label>
-        <ul id="select-mode-picker">
+        <ul id="select-mode-picker" class="boolean-mode-picker">
             <li>
                 <label for="select-mode-single">Single Die</label>
                 <input type="radio" name="select-mode" id="select-mode-single" @input='${mod(() => appstate.select_mode = "single")}'>
@@ -206,17 +209,34 @@ let mainpage = (appstate) => html`
         </ul>
     </div>
         </li>
+    <div class="segment">
+        <label>Display Successes</label>
+        <ul id="success_mode_picker" class="boolean-mode-picker">
+            <li>
+                <label for="display-mode-yes">Show</label>
+                <input type="radio" name="display-mode" id="display-mode-yes" checked @input='${mod(() => appstate.display_successes = true)}'>
+            </li>
+            <li>
+                <label for="display-mode-no">Hide</label>
+                <input type="radio" name="display-mode" id="display-mode-no" @input='${mod(() => appstate.display_successes = false)}' >
+            </li>
+        </ul>
+    </div>
+        </li>
     </ul>
 </div>
 </div>
 `
+let roll_a_dx = (x) => Math.floor(Math.random() * Math.floor(x))
+
 async function roll_in_dice(appstate) {
     if (appstate.roll_in.size != 0) {
         setTimeout(function () {
             console.log(appstate.roll_in);
-            appstate.roll_in.delete([...appstate.roll_in.values()].reverse()[0]);
+            appstate.roll_in.delete([...appstate.roll_in.values()][roll_a_dx(appstate.roll_in.size)]);
             render_page();
-        }, 200);
+        }, 
+        200);
     }
 }
 
