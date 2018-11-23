@@ -9,4 +9,13 @@ function rolldice(number_of_dice) {
     return ret
 }
 
-export {rolldice}
+function countsuccesses(success_set, double_set, roll_vec) {
+    function countroll (roll) {
+        let as_success = success_set.has(roll) ? 1 : 0;
+        let as_double = double_set.has(roll) ? 2 : 1;
+        return as_success * as_double;
+    }
+    return roll_vec.map(countroll).reduce((a, b) => a + b)
+}
+
+export {rolldice, countsuccesses}

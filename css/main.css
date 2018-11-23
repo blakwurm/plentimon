@@ -25,6 +25,21 @@ body {
     height: 80px;
 }
 
+#successesreadout {
+    z-index: 199;
+    color:gold;
+    background: red;
+    border: 3px double gold;
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    width: 75px;
+    height: 60px;
+    font-size: 50px;
+    text-align: center;
+    
+}
+
 #console, #dicereadout {
     position: absolute;
     top: 0;
@@ -225,7 +240,7 @@ button {
 }
 
 .dice-number-selector li {
-    margin: 0 1.5px;
+    margin: 0 1.3px;
 }
 
 .dice-number-selector li label {
@@ -249,6 +264,21 @@ button {
         height: calc(100vh - 170px);
         max-height: 100vh;
     }
+    #successesreadout {
+        z-index: 199;
+        color:gold;
+        background: red;
+        border: 3px double gold;
+        position: fixed;
+        left: 5px;
+        top: 5px;
+        width: 60px;
+        height: 75px;
+        line-height: 75px;
+        font-size: 50px;
+        text-align: center;
+    }
+
     #console, #dicereadout {
         position: absolute;
         top: 0;

@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/lit-html?module'
-import { rolldice } from './rolldice.js'
+import { rolldice, countsuccesses } from './rolldice.js'
 
 let appstate = {
     roll_number: 3,
@@ -7,7 +7,7 @@ let appstate = {
     max_dice: 30,
     success: new Set([10, 9, 8, 7]),
     double: new Set([10]),
-    selected: new Set([0, 3, 4]),
+    selected: new Set([]),
     roll: rolldice(10),
     select_mode: "multiple"
 }
@@ -33,6 +33,15 @@ function set_roll_number(appstate, new_number) {
     render_page();
 }
 
+function toggle_appstate_set(the_set, questioned_member) {
+    if (the_set.has(questioned_member)) {
+        the_set.delete(questioned_member);
+    } else {
+        the_set.add(questioned_member)
+    }
+    render_page();
+}
+
 let roll_line = (rollobj) => html`
 <p>${rollobj.timestamp.getHours()}:${rollobj.timestamp.getMinutes()}:${rollobj.timestamp.getSeconds()}
     || ${rollobj.successes} successes rolling ${rollobj.rolls.join(', ')}, with double ${rollobj.double} rerolling ${rollobj.reroll}</p>
@@ -43,9 +52,9 @@ let empty_string = ""
 
 function make_checkbox(selected_set, numbah) {
     if (selected_set.has(numbah + 1)) {
-        return html`<input type="checkbox" id="reroll-${numbah + 1}" checked>`
+        return html`<input type="checkbox" id="reroll-${numbah + 1}" @change='${() => toggle_appstate_set(selected_set, numbah + 1)}' checked>`
     } else {
-        return html`<input type="checkbox" id="reroll-${numbah + 1}" >`
+        return html`<input type="checkbox" id="reroll-${numbah + 1}"  @change='${() => toggle_appstate_set(selected_set, numbah + 1)}'>`
     }
 }
 
@@ -82,8 +91,31 @@ function make_result_flag(appstate, roll_index) {
     return successflag + " " + doubleflag
 }
 
+function toggle_selected_die(appstate, roll_index) {
+    return function () {
+        let directlySelected = appstate.selected.has(roll_index);
+        let modeIsMultiple = appstate.select_mode == "multiple";
+        if (modeIsMultiple && !directlySelected) {
+            let thisvalue = appstate.roll[roll_index];
+            for (let x of appstate.selected) {
+                if (appstate.roll[x] === thisvalue) {
+                    appstate.selected.delete(x);
+                    directlySelected = true;
+                }                
+            }
+            appstate.selected.add(roll_index);
+        } 
+        if (directlySelected) {
+            appstate.selected.delete(roll_index);
+        } else {
+            appstate.selected.add(roll_index);
+        }
+        render_page();
+    }
+}
+
 let make_die_li_fn = (appstate) => (roll_index) => html`
-<li><button class="die ${make_selected_flag(appstate, roll_index)} ${make_result_flag(appstate, roll_index)}" type="button">
+<li><button class="die ${make_selected_flag(appstate, roll_index)} ${make_result_flag(appstate, roll_index)}" type="button" @click='${toggle_selected_die(appstate, roll_index)}'>
         <p>${appstate.roll[roll_index]}</p>
     </button>
 </li>
@@ -95,8 +127,8 @@ let make_dicelist = (appstate) => html`
 </ul>
 `
 
-
 let mainpage = (appstate) => html`
+<div id="successesreadout">${countsuccesses(appstate.success, appstate.double, appstate.roll)}</div>
 <div id="dicereadout">
     ${make_dicelist(appstate)}
 </div>
@@ -127,7 +159,7 @@ let mainpage = (appstate) => html`
         <li>
     <div class="segment">
         <label>Double</label>
-        ${dice_number_selector('double', appstate.success)}
+        ${dice_number_selector('double', appstate.double)}
     </div>
         </li>
         <li>
@@ -136,11 +168,11 @@ let mainpage = (appstate) => html`
         <ul id="select-mode-picker">
             <li>
                 <label for="select-mode-single">Single Die</label>
-                <input type="radio" name="select-mode" id="select-mode-single">
+                <input type="radio" name="select-mode" id="select-mode-single" @input='${mod(() => appstate.select_mode = "single")}'>
             </li>
             <li>
                 <label for="select-mode-all">All of Number</label>
-                <input type="radio" name="select-mode" id="select-mode-all" checked>
+                <input type="radio" name="select-mode" id="select-mode-all" checked @input='${mod(() => appstate.select_mode = "multiple")}' >
             </li>
         </ul>
     </div>
