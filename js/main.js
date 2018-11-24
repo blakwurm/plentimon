@@ -172,7 +172,7 @@ ${appstate.display_successes ? html`<div id="successesreadout">${countsuccesses(
         <li>
     <div class="segment" id="d-quantity">
         <label>Dice to Roll</label>
-        <input class="direct-input" type="number" min=1 max=30 value="${appstate.roll_number}">
+        <input class="direct-input" type="number" min=1 max=30 value="${appstate.roll_number}" @input='${(e) => set_roll_number(appstate, e.target.value)}'>
         <div class="acceso-range">
             <button class="incdec" type="button" @click='${() => set_roll_number(appstate, appstate.roll_number - 1)}'>-</button>
             <input type="range" min='${appstate.min_dice}' max='${appstate.max_dice}' value="${appstate.roll_number}" @input='${(e) => set_roll_number(appstate, e.target.value)}'>
