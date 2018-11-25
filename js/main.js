@@ -14,7 +14,8 @@ let appstate = {
     roll_in: new Set([]),
     display_successes: false,
     counted_successes: 0,
-    history: []
+    history: [],
+    display_history: false
 }
 
 function mod(mod_fn) {
@@ -30,7 +31,8 @@ function add_to_history(appstate) {
         double: new Set(appstate.double),
         auto: appstate.auto,
         counted_successes: appstate.counted_successes,
-        roll: JSON.parse(JSON.stringify(appstate.roll))
+        roll: JSON.parse(JSON.stringify(appstate.roll)),
+        roll_number: appstate.roll.size
     })
     return appstate
 }
@@ -42,7 +44,6 @@ function roll_the_dice(appstate) {
         let the_roll = rolldice(appstate.roll_number);
         appstate.roll = the_roll
         appstate.roll_in = new Set(the_roll.keys());
-        console.log(appstate.roll_in);
         render_page();
     }
 }
@@ -176,7 +177,47 @@ function reroll_button_press(appstate) {
     }
 }
 
+let history_line = (history_node) => html`
+<li>
+    <div>
+        ${history_node.counted_successes + history_node.auto}
+        (${history_node.counted_successes} + ${history_node.auto})
+    </div>
+    <div>
+        ${JSON.stringify([...history_node.success])}
+    </div>
+    <div>
+        ${JSON.stringify([...history_node.double])}
+    </div>
+    <div>
+        ${JSON.stringify(history_node.roll)}
+    </div>
+</li>
+`
+
+function set_display_history (appstate, new_showing) {
+    appstate.display_history = new_showing;
+    console.log('this happens');
+    render_page();
+    return ''
+}
+let history_readout = (appstate) => html`
+<div id="historyreadout">
+    <ul>
+        <li class="legend">
+            <div>Successes</div>
+            <div>Targets</div>
+            <div>Double</div>
+            <div>Raw Roll</div>
+        </li>
+        ${appstate.history.map(history_line)}
+    </ul>
+    <button class="closebutton" @click='${() => set_display_history(appstate, false)}'>Close</button>
+</div>
+`
+
 let mainpage = (appstate) => html`
+${appstate.display_history ? history_readout(appstate) : ''}
 ${appstate.display_successes || appstate.roll_in.size === 0 ? html`
     <div id="successesreadout">
         <div>Roll: ${appstate.counted_successes}</div>
@@ -187,6 +228,8 @@ ${appstate.display_successes || appstate.roll_in.size === 0 ? html`
         <div>Total Successes</div>
     </div>
     ` : ''}
+
+<button id="historybutton" @click='${() => set_display_history(appstate, true)}'>History</button>
 
 <div id="dicereadout">
     ${make_dicelist(appstate)}
