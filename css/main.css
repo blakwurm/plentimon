@@ -1,3 +1,4 @@
+/* https://lospec.com/palette-list/fantasy-24 */
 * {
     color:#efd8a1;
     font-family: 'UniqueRegular';
@@ -38,7 +39,11 @@ body {
     height: 8.5em;
     padding: 2px;
     text-align: center;
-    
+    animation: fadein 1s ease; 
+}
+@keyframes fadein {
+    from { opacity: 0; top: -55px; }
+    to {opacity: 1; top: 15px;}
 }
  #successesreadout #numbah {
     font-size: 50px;
@@ -53,7 +58,7 @@ body {
     top: 0;
     left: 0;
     right: var(--right-dicereadout-margin);
-    bottom: 60vh;
+    bottom:calc(60vh + 5px);
     border: double 5px #efd8a1;
     border-top: none;
     border-left: none;
@@ -76,7 +81,7 @@ body {
 #input {
     position: fixed;
     bottom: 0;
-    top: 45vh;
+    top: calc(40vh + 5px);
     right: 20px;
     left: 0;
     color: black;
@@ -134,11 +139,11 @@ body {
     width: 40px;
     height: 40px;
     text-align: center;
-    animation: fadein 1s;
+    animation: rollin 1s;
     float: left;
     box-shadow: none;
 }
-@keyframes fadein {
+@keyframes rollin {
     from { opacity: 0; transform: rotate(1000deg); }
     to {opacity: 1; transform: rotate(0deg); }
 }
@@ -162,6 +167,12 @@ body {
     bottom: 0;
     right: 0;
     text-shadow: 0px 0px 3px red;
+}
+#dicereadout .die.success p {
+    text-shadow: 0px 0px 3px #3c9f9c;
+}
+#dicereadout .die.success.double p {
+    color: #276468;
 }
 
 #dicereadout .die.selected {

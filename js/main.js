@@ -12,8 +12,9 @@ let appstate = {
     roll: rolldice(10),
     select_mode: "multiple",
     roll_in: new Set([]),
-    display_successes: true,
-    counted_successes: 0
+    display_successes: false,
+    counted_successes: 0,
+    history: []
 }
 
 function mod(mod_fn) {
@@ -23,8 +24,21 @@ function mod(mod_fn) {
     }
 }
 
+function add_to_history(appstate) {
+    appstate.history.unshift({
+        success: new Set(appstate.success),
+        double: new Set(appstate.double),
+        auto: appstate.auto,
+        counted_successes: appstate.counted_successes,
+        roll: JSON.parse(JSON.stringify(appstate.roll))
+    })
+    return appstate
+}
+
 function roll_the_dice(appstate) {
     return function() {
+        add_to_history(appstate);
+        console.log(appstate.history);
         let the_roll = rolldice(appstate.roll_number);
         appstate.roll = the_roll
         appstate.roll_in = new Set(the_roll.keys());
@@ -163,7 +177,7 @@ function reroll_button_press(appstate) {
 }
 
 let mainpage = (appstate) => html`
-${appstate.display_successes ? html`
+${appstate.display_successes || appstate.roll_in.size === 0 ? html`
     <div id="successesreadout">
         <div>Roll: ${appstate.counted_successes}</div>
         <div>Auto: ${appstate.auto}</div>
@@ -236,11 +250,11 @@ ${appstate.display_successes ? html`
         <ul id="success_mode_picker" class="boolean-mode-picker">
             <li>
                 <label for="display-mode-yes">Show</label>
-                <input type="radio" name="display-mode" id="display-mode-yes" checked @input='${mod(() => appstate.display_successes = true)}'>
+                <input type="radio" name="display-mode" id="display-mode-yes" @input='${mod(() => appstate.display_successes = true)}'>
             </li>
             <li>
-                <label for="display-mode-no">Hide</label>
-                <input type="radio" name="display-mode" id="display-mode-no" @input='${mod(() => appstate.display_successes = false)}' >
+                <label for="display-mode-no">Hide During Rollout</label>
+                <input type="radio" name="display-mode" id="display-mode-no" checked @input='${mod(() => appstate.display_successes = false)}' >
             </li>
         </ul>
     </div>
@@ -254,7 +268,6 @@ let roll_a_dx = (x) => Math.floor(Math.random() * Math.floor(x))
 async function roll_in_dice(appstate) {
     if (appstate.roll_in.size != 0) {
         setTimeout(function () {
-            console.log(appstate.roll_in);
             appstate.roll_in.delete([...appstate.roll_in.values()][roll_a_dx(appstate.roll_in.size)]);
             render_page();
         }, 
