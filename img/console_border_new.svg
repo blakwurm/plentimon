@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.313709"
-     inkscape:cx="62.421551"
-     inkscape:cy="48.508395"
+     inkscape:cx="61.095726"
+     inkscape:cy="59.468551"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -47,15 +47,15 @@
      id="defs4534">
     <linearGradient
        inkscape:collect="always"
-       id="linearGradient2914">
+       id="linearGradient3057">
       <stop
-         style="stop-color:#276468;stop-opacity:1"
+         style="stop-color:#183f39;stop-opacity:1"
          offset="0"
-         id="stop2910" />
+         id="stop3053" />
       <stop
          style="stop-color:#3c9f9c;stop-opacity:1"
          offset="1"
-         id="stop2912" />
+         id="stop3055" />
     </linearGradient>
     <linearGradient
        id="linearGradient2744"
@@ -65,17 +65,6 @@
          offset="0"
          id="stop2742" />
     </linearGradient>
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient2914"
-       id="radialGradient2916"
-       cx="25.03125"
-       cy="51"
-       fx="25.03125"
-       fy="51"
-       r="20.03125"
-       gradientTransform="matrix(0.83847313,0.130602,-0.49765988,3.1950079,29.423874,-115.21453)"
-       gradientUnits="userSpaceOnUse" />
     <filter
        inkscape:label="Refractive Gel A"
        inkscape:menu="Ridges"
@@ -151,6 +140,55 @@
          in2="result91"
          id="feBlend2984" />
     </filter>
+    <filter
+       inkscape:label="Film Grain"
+       inkscape:menu="Image Effects"
+       inkscape:menu-tooltip="Adds a small scale graininess"
+       style="color-interpolation-filters:sRGB;"
+       id="filter3037">
+      <feTurbulence
+         type="fractalNoise"
+         numOctaves="3"
+         baseFrequency="1"
+         seed="0"
+         result="result0"
+         id="feTurbulence3027" />
+      <feColorMatrix
+         result="result4"
+         values="0"
+         type="saturate"
+         id="feColorMatrix3029" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result4"
+         operator="arithmetic"
+         k1="1.25"
+         k2="0.5"
+         k3="0.5"
+         result="result2"
+         id="feComposite3031" />
+      <feBlend
+         result="result5"
+         mode="normal"
+         in="result2"
+         in2="SourceGraphic"
+         id="feBlend3033" />
+      <feComposite
+         in="result5"
+         in2="SourceGraphic"
+         operator="in"
+         result="result3"
+         id="feComposite3035" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3057"
+       id="linearGradient3045"
+       x1="15"
+       y1="17"
+       x2="70"
+       y2="55"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <metadata
      id="metadata4537">
@@ -170,7 +208,7 @@
      inkscape:label="Layer 2"
      style="display:inline;opacity:1">
     <rect
-       style="display:inline;fill:url(#radialGradient2916);fill-opacity:1;stroke:none;stroke-width:1.06440878;stroke-opacity:1;filter:url(#filter2986)"
+       style="display:inline;fill:url(#linearGradient3045);fill-opacity:1;stroke:none;stroke-width:1.06440878;stroke-opacity:1;filter:url(#filter3037)"
        id="rect1253"
        width="40.0625"
        height="90"
