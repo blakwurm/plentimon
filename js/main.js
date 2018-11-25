@@ -8,10 +8,12 @@ let appstate = {
     success: new Set([10, 9, 8, 7]),
     double: new Set([10]),
     selected: new Set([]),
+    auto: 0,
     roll: rolldice(10),
     select_mode: "multiple",
     roll_in: new Set([]),
-    display_successes: true
+    display_successes: true,
+    counted_successes: 0
 }
 
 function mod(mod_fn) {
@@ -32,8 +34,13 @@ function roll_the_dice(appstate) {
 }
 
 function set_roll_number(appstate, new_number) {
-    new_number = Math.min(appstate.max_dice, Math.max(appstate.min_dice, new_number))
+    new_number =  Math.max(appstate.min_dice, new_number);
     appstate.roll_number = new_number;
+    render_page();
+}
+
+function set_auto_number(appstate, new_number) {
+    appstate.auto = Math.max(new_number, 0)
     render_page();
 }
 
@@ -156,7 +163,16 @@ function reroll_button_press(appstate) {
 }
 
 let mainpage = (appstate) => html`
-${appstate.display_successes ? html`<div id="successesreadout">${countsuccesses(appstate.success, appstate.double, appstate.roll)}</div>` : ''}
+${appstate.display_successes ? html`
+    <div id="successesreadout">
+        <div>Roll: ${appstate.counted_successes}</div>
+        <div>Auto: ${appstate.auto}</div>
+        <div id="numbah">
+            ${appstate.counted_successes + appstate.auto}
+        </div>
+        <div>Total Successes</div>
+    </div>
+    ` : ''}
 
 <div id="dicereadout">
     ${make_dicelist(appstate)}
@@ -172,7 +188,7 @@ ${appstate.display_successes ? html`<div id="successesreadout">${countsuccesses(
         <li>
     <div class="segment" id="d-quantity">
         <label>Dice to Roll</label>
-        <input class="direct-input" type="number" min=1 max=30 value="${appstate.roll_number}" @input='${(e) => set_roll_number(appstate, e.target.value)}'>
+        <input class="direct-input" type="number" min=1 max=99 value="${appstate.roll_number}" @input='${(e) => set_roll_number(appstate, e.target.value)}'>
         <div class="acceso-range">
             <button class="incdec" type="button" @click='${() => set_roll_number(appstate, appstate.roll_number - 1)}'>-</button>
             <input type="range" min='${appstate.min_dice}' max='${appstate.max_dice}' value="${appstate.roll_number}" @input='${(e) => set_roll_number(appstate, e.target.value)}'>
@@ -181,9 +197,17 @@ ${appstate.display_successes ? html`<div id="successesreadout">${countsuccesses(
     </div>
         </li>
         <li>
+    <div class="segment" id="auto-successes-selector">
+        <label>Auto Successes</label>
+        <button class="incdec" type="button" @click='${() => set_auto_number(appstate, appstate.auto - 1)}'>-</button>
+        <input class="direct-input" type="number" min=1 max=99 value="${appstate.auto}" @input='${(e) => set_auto_number(appstate, e.target.value)}'>
+        <button class="incdec" type="button" @click='${() => set_auto_number(appstate, appstate.auto + 1)}'>+</button>
+    </div>
+        </li>
+        <li>
     <div class="segment">
-        <label>Successes</label>
-        ${dice_number_selector('successes', appstate.success)}
+        <label>Target</label>
+        ${dice_number_selector('target', appstate.success)}
     </div>
         </li>
         <li>
@@ -239,6 +263,7 @@ async function roll_in_dice(appstate) {
 }
 
 async function render_page() {
+    appstate.counted_successes = countsuccesses(appstate.success, appstate.double, appstate.roll);
     render(mainpage(appstate), document.querySelector("#pagecontent"));
     roll_in_dice(appstate);
 }

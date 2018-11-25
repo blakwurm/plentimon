@@ -1,8 +1,12 @@
 * {
-    color: white;
+    color:#efd8a1;
     font-family: 'UniqueRegular';
     margin: 0;
     padding: 0;
+    --text-color:#efd8a1; 
+    --right-dicereadout-margin: 145px;
+    --button-background: #ab5c1c;
+    --button-border: 6px double #773421;
 }
 
 ::-webkit-scrollbar {
@@ -10,55 +14,54 @@
 }
 
 body {
-    background-color: black;
+    background-color: #2a1d0d;
 }
 
 #pagetitle {
     font-size: 30px;
     text-align: center;
-    position: absolute;
-    left: 45px;
-    top: 35px;
+    position: fixed;
+    right: calc(var(--right-dicereadout-margin) - 35px);
+    top: 10px;
+    writing-mode: tb;
     width: calc(100% - 170px);
     overflow: hidden;
-    max-height: 1em;
-    height: 80px;
 }
 
 #successesreadout {
     z-index: 199;
-    color:gold;
-    background: red;
-    border: 3px double gold;
+    border: 3px double var(--text-color);
     position: fixed;
-    right: 5px;
-    top: 5px;
+    right: 15px;
+    top: 15px;
     width: 75px;
-    height: 60px;
-    font-size: 50px;
+    height: 8.5em;
+    padding: 2px;
     text-align: center;
     
+}
+ #successesreadout #numbah {
+    font-size: 50px;
+ }
+
+#successreadout ::before {
+    content: "Total: ";
 }
 
 #console, #dicereadout {
     position: absolute;
     top: 0;
-    right: 0;
     left: 0;
-    bottom: 40vh;
-    border: solid 3px transparent;
+    right: var(--right-dicereadout-margin);
+    bottom: 60vh;
+    border: double 5px #efd8a1;
+    border-top: none;
+    border-left: none;
+    border-radius: 0 0 20px 0;
     margin-bottom: -1px;
-    padding-top: 72px;
-    height: calc(35vh);
     display: block;
-    border-image: url('/img/console_border.svg');
-    border-image-slice: 38 45 23 33 fill;
-    border-image-width: 38 45 23 33;
     overflow-y: scroll;
-}
-
-#dicereadout {
-    overflow: hidden;
+    text-align: center;
 }
 
 #console ::scrollbar {
@@ -71,18 +74,23 @@ body {
 }
 
 #input {
-    position: absolute;
-    top: 40vh;
-    padding: 40px;
+    position: fixed;
+    bottom: 0;
+    top: 45vh;
+    right: 20px;
+    left: 0;
     color: black;
-    border: solid 3px white;
-    border-image: url('/img/button_border.svg');
-    border-image-slice: 45 fill;
-    border-image-width: 45;
+    border: double 5px #efd8a1;
+    border-left: none;
+    border-bottom: none;
+    border-radius: 0 30px 0 0;
     margin: 0px;
-    padding-bottom: 70px;
-    height: calc(50vh + 70px - 180px);
-    width: calc(100% - 20px - 70px);
+}
+
+#input, #console, #dicereadout {
+}
+
+#console, #dicereadout {
 }
 
 #input #inputlist {
@@ -92,7 +100,6 @@ body {
 }
 
 #input * {
-    color: black;
 }
 
 #dicereadout {
@@ -100,29 +107,24 @@ body {
 }
 
 #dicereadout #dicelist {
-    height: 30vh;
-    width:80vw;
-    margin: 0 10vw;
+    margin: 0;
     list-style: none;
     text-align: center;
-    grid-template-columns: repeat(auto-fill, 40px);
-    grid-template-rows: repeat(auto-fill, 40px);
-    overflow-y: scroll;
 }
 
 #dicereadout #dicelist .shadowdie {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: -99;
-    display: hidden;
+    display: none;
     width: 0;
     height: 0;
 }
 
 #dicereadout .die {
     position: relative;
-    background-image: url('/img/d10_fail.svg');
+    background-image: url('/img/d10_raw.svg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -134,17 +136,18 @@ body {
     text-align: center;
     animation: fadein 1s;
     float: left;
+    box-shadow: none;
 }
 @keyframes fadein {
     from { opacity: 0; transform: rotate(1000deg); }
     to {opacity: 1; transform: rotate(0deg); }
 }
 #dicereadout .die.success {
-    background-image: url('/img/d10.svg');
+    background-image: url('/img/d10__success_raw.svg');
 }
 
 #dicereadout .die.success.double {
-    background-image: url('/img/d10_double_raw.svg');
+    background-image: url('/img/d10__double_raw.svg');
 }
 #dicereadout .die:before {
     content: "";
@@ -169,7 +172,7 @@ body {
 
 #input .segment {
     text-align: center;
-    border-bottom: 3px double gold;
+    border-bottom: 3px double #724113;
     width: 90%;
     padding: 10px 0;
     margin: 0 auto;
@@ -178,9 +181,12 @@ body {
 #input .segment label {
     margin: 3px;
 }
+#auto-successes-selector label {
+    display: block;
+} 
 #input .segment .direct-input {
     border: none;
-    border-bottom: 2px gold solid;
+    border-bottom: 2px var(--text-color) solid;
     background: none;
     font-size: 200%;
     text-align: center;
@@ -195,13 +201,14 @@ body {
     height: 3em;
 }
 
-#input .segment .acceso-range .incdec {
+#input .segment .incdec {
     width: 30px;
     height: 30px;
     margin: 3px;
-    background: none;
-    border: 3px solid gold;
+    background: var(--button-background);
+    border: var(--button-border);
     font-size: 100%;
+    font-weight: 900;
 }
 #input .segment .acceso-range input {
     appearance: none;
@@ -209,25 +216,23 @@ body {
     width: 90%;
     height: 3px;
     background: none;
-    border: 3px dashed gold;
+    border: var(--button-border);
 }
 #input .segment .acceso-range input::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
-    background-image: url('/img/goldthumb.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: var(--button-background);
+    border: var(--button-border);
     box-shadow: 0px 0px 5px black;
 }
 
 #input .segment #rollbutton, #input .segment #rerollbutton {
     width: 50vw;
     height: 40px;
-    background: red;
-    color: black;
-    border: 6px double gold;
+    background: var(--button-background);
+    border: var(--button-border);
 }
 
 #input .segment #rerollbutton {
@@ -237,7 +242,6 @@ body {
 }
 
 button {
-    box-shadow: 0px 0px 5px black;
 }
 
 .boolean-mode-picker, #tricklist, .dice-number-selector {
@@ -254,13 +258,6 @@ button {
     width: 30vw;
 }
 
-#tricklist li button {
-    margin: 3px;
-    padding: 3px;
-    background: red;
-    border: 4px double gold;
-}
-
 .dice-number-selector li {
     margin: 0 1.3px;
 }
@@ -272,89 +269,5 @@ button {
 }
 
 @media (orientation:landscape) {
-    #pagetitle {
-        display: block;
-        font-size: 30px;
-        text-align: center;
-        position: fixed;
-        transform: rotate(180deg);
-        writing-mode: tb;
-        top: 130px;
-        left: 35px;
-        bottom: 70px;
-        width: 30px;
-        height: calc(100vh - 170px);
-        max-height: 100vh;
-    }
-    #successesreadout {
-        z-index: 199;
-        color:gold;
-        background: red;
-        border: 3px double gold;
-        position: fixed;
-        left: 5px;
-        top: 5px;
-        width: 60px;
-        height: 75px;
-        line-height: 75px;
-        font-size: 50px;
-        text-align: center;
-    }
-
-    #console, #dicereadout {
-        position: absolute;
-        top: 0;
-        right: 45vw;
-        left: 0;
-        bottom: 0;
-        height: auto;
-        border: solid 3px transparent;
-        padding-top: 0px;
-        padding-bottom: 0px;
-        margin-bottom: -1px;
-        display: block;
-        border-image: url('/img/console_border_sideways.svg');
-        border-image-slice: 45 fill;
-        border-image-width: 45;
-        overflow-y: scroll;
-        padding-left: 20px;
-    }
-    #dicereadout #dicelist {
-        height: calc(100vh - 59px);
-        display: grid;
-        padding: 0;
-        margin: 0;
-        margin-left: 65px;
-        margin-top: 27px;
-        width: 35vw;
-        text-align: right;
-        list-style: none;
-        grid-template-rows: repeat(auto-fill, 40px);
-        grid-template-columns: repeat(auto-fill, 40px);
-        overflow-y: scroll;
-    }
-    #input {
-        position: absolute;
-        top: 10px;
-        right: 0;
-        left: 49vw;
-        bottom: 10px;
-        width: auto;
-        height: auto;
-        padding: 40px;
-        color: black;
-        border: solid 3px white;
-        border-image: url('/img/button_border_sideways.svg');
-        border-image-slice: 45 fill;
-        border-image-width: 45;
-        margin: 0px;
-        padding-right: 70px;
-    }
-    #input .segment #rollbutton {
-        width: 25vw;
-        height: 30px;
-        background: red;
-        color: black;
-        border: 6px double gold;
-    }
+   
 }

@@ -11,9 +11,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="40"
-   height="90"
-   viewBox="0 0 40 90"
+   width="100px"
+   height="100px"
+   viewBox="0 0 100 100"
    version="1.1"
    id="SVGRoot"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -25,11 +25,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.313709"
-     inkscape:cx="7.8330113"
-     inkscape:cy="46.560581"
+     inkscape:zoom="45.254834"
+     inkscape:cx="40.155503"
+     inkscape:cy="10.530476"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer4"
      showgrid="true"
      inkscape:window-width="2400"
      inkscape:window-height="1497"
@@ -73,7 +73,7 @@
        width="1.4"
        y="-0.2"
        x="-0.2"
-       style="color-interpolation-filters:sRGB"
+       style="color-interpolation-filters:sRGB;"
        id="filter2986">
       <feOffset
          dx="7"
@@ -110,9 +110,9 @@
          id="feGaussianBlur2974" />
       <feSpecularLighting
          specularExponent="20"
-         specularConstant="1.20000005"
+         specularConstant="1.2"
          surfaceScale="3"
-         lighting-color="#ffffff"
+         lighting-color="rgb(255,255,255)"
          result="result1"
          in="result0"
          id="feSpecularLighting2978">
@@ -134,9 +134,7 @@
          k3="2"
          in2="result2"
          result="result91"
-         id="feComposite2982"
-         k1="0"
-         k4="0" />
+         id="feComposite2982" />
       <feBlend
          mode="multiply"
          in2="result91"
@@ -146,7 +144,7 @@
        inkscape:label="Film Grain"
        inkscape:menu="Image Effects"
        inkscape:menu-tooltip="Adds a small scale graininess"
-       style="color-interpolation-filters:sRGB"
+       style="color-interpolation-filters:sRGB;"
        id="filter3037">
       <feTurbulence
          type="fractalNoise"
@@ -168,8 +166,7 @@
          k2="0.5"
          k3="0.5"
          result="result2"
-         id="feComposite3031"
-         k4="0" />
+         id="feComposite3031" />
       <feBlend
          result="result5"
          mode="normal"
@@ -189,7 +186,7 @@
        id="filter3264"
        x="-0.011936842"
        width="1.0238737"
-       y="-0.0051545454"
+       y="-0.0051545455"
        height="1.0103091">
       <feGaussianBlur
          inkscape:collect="always"
@@ -204,14 +201,14 @@
        cy="50"
        fx="24.5"
        fy="50"
-       r="19.965536"
-       gradientTransform="matrix(1.0768556,0.45077672,-1.0077819,2.4074794,43.506129,-77.417994)"
+       r="19.965537"
+       gradientTransform="matrix(1.0768556,0.45077672,-1.0077819,2.4074794,48.506129,-81.417994)"
        gradientUnits="userSpaceOnUse" />
     <filter
        inkscape:collect="always"
        style="color-interpolation-filters:sRGB"
        id="filter3394"
-       x="-0.05117647"
+       x="-0.051176471"
        width="1.1023529"
        y="-0.021219512"
        height="1.042439">
@@ -229,40 +226,42 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Layer 5" />
+  <g
+     inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 2"
-     style="display:inline;opacity:1"
-     transform="translate(0,-10)">
+     style="display:inline;opacity:1">
     <rect
        style="display:inline;fill:#276468;fill-opacity:1;stroke:none;stroke-width:1.06440878;stroke-opacity:1;filter:url(#filter3037)"
        id="rect1253"
        width="40.0625"
        height="90"
-       x="-0.0625"
-       y="10"
+       x="5"
+       y="6"
        ry="5" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
-     style="display:inline"
-     transform="translate(0,-10)">
+     style="display:inline">
     <path
        style="opacity:0.52399998;fill:url(#radialGradient3372);fill-opacity:1;stroke:none;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter3264)"
-       d="M 39,12 H 6 C 4,12 3.5671026,13.940359 3,15 V 96 L 1,98 C 0,96 0,95 0,95 V 15 c 0,-4 3,-5 5,-5 h 30 c 2,0 3,1 4,2 z"
+       d="M 44,8 H 11 C 9,8 8.5671026,9.940359 8,11 V 92 L 6,94 C 5,92 5,91 5,91 V 11 C 5,7 8,6 10,6 h 30 c 2,0 3,1 4,2 z"
        id="path3060"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccccc" />
     <path
-       style="opacity:0.54799996;fill:#183f39;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3394)"
-       d="M 5,94 V 14 h 30 l 2,-2 H 20 6 C 5,12 3,13 3,16 V 36.5 57 77.5 Z"
+       style="opacity:0.548;fill:#183f39;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3394)"
+       d="M 10,90 V 10 H 40 L 42,8 H 25 11 C 10,8 8,9 8,12 V 32.5 53 73.5 Z"
        id="path3268"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccc" />
@@ -271,40 +270,38 @@
        inkscape:connector-curvature="0"
        id="path3398"
        d="M 44,8 H 11 C 9,8 8.5671026,9.940359 8,11 V 92 L 6,94 C 5,92 5,91 5,91 V 11 C 5,7 8,6 10,6 h 30 c 2,0 3,1 4,2 z"
-       style="opacity:0.37700004;fill:#183f39;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter3264)"
-       transform="rotate(-180,22.5,53)" />
+       style="opacity:0.377;fill:#183f39;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter3264)"
+       transform="rotate(-180,25,51)" />
     <path
        sodipodi:nodetypes="ccccccccccc"
        inkscape:connector-curvature="0"
        id="path3408"
        d="M 10,90 V 10 H 40 L 42,8 H 25 11 C 10,8 8,9 8,12 V 32.5 53 73.5 Z"
        style="opacity:0.54799996;fill:#3c9f9c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3394)"
-       transform="rotate(-180,22.5,52.5)" />
+       transform="rotate(-180,25,50.5)" />
   </g>
   <g
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1"
-     style="display:inline"
-     transform="translate(0,-10)">
+     style="display:inline">
     <rect
        style="opacity:1;fill:#2a1d0d;fill-opacity:1;stroke:#2a1d0d;stroke-width:0.50616693;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3410"
        width="30.5625"
        height="80"
-       x="5"
-       y="14"
+       x="10"
+       y="10"
        ry="2" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="Layer 4"
-     transform="translate(0,-10)">
+     inkscape:label="Layer 4">
     <path
        id="path1143"
        style="fill:none;stroke:#2a1d0d;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 34,100 c 1,-1 2,-7 0,-7 m -4,7 c 1,-1 2,-6 0,-6 m -5,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m 31,1 c -0.0054,3.013212 -1.81361,5 -4.534024,5 H 16.423077 M 5,100 c 1,-1 3,-7 1,-7 m -6,2 c 0.00599,3.013212 2,5 5,5 h 21 m 8,-90 c 1,1 1,4 0,4 m -4,-4 c 1,1 1,4 0,4 m -4,-4 c 1,1 1,4 0,4 m -4,-4 c 1,1 1,4 0,4 m -4,-4 c 1,1 1,4 0,4 m -4,-4 c 1,1 1,4 0,4 m -4,-4 c 1,1 1,4 0,4 m 30,1 c -0.0054,-3.013212 -1.81361,-5 -4.534024,-5 H 25 m 9,83 c 2,-1 4,1 6,2 v -3 m -5,-2 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-8 c 2,-1 3,-1 5,0 v 4 M 6,10 c 1,1 1,5 0,5 M 0,15 C 0.00599,11.986788 2,10 5,10 H 25 M 6,93 C 4,92 2,94 0,95 V 92 M 5,90 C 3,89 2,90 0,91 v 4 M 5,86 C 3,85 2,86 0,87 v 4 M 5,82 C 3,81 2,82 0,83 v 4 M 5,78 C 3,77 2,78 0,79 v 4 M 5,74 C 3,73 2,74 0,75 v 4 M 5,70 C 3,69 2,70 0,71 v 4 M 5,66 C 3,65 2,66 0,67 v 4 M 5,62 C 3,61 2,62 0,63 v 4 M 5,58 C 3,57 2,58 0,59 v 4 M 5,54 C 3,53 2,54 0,55 v 4 M 5,50 C 3,49 2,50 0,51 v 4 M 5,46 C 3,45 2,46 0,47 v 4 M 5,42 C 3,41 2,42 0,43 v 4 M 5,38 C 3,37 2,38 0,39 v 4 M 5,34 C 3,33 2,34 0,35 v 4 M 5,30 C 3,29 2,30 0,31 v 4 M 5,26 C 3,25 2,26 0,27 v 4 M 5,22 C 3,21 2,22 0,23 v 4 M 5,18 C 3,17 2,18 0,19 v 4 M 6,15 C 4,14 2,14 0,15 v 4"
+       d="m 39,96 c 1,-1 2,-7 0,-7 m -4,7 c 1,-1 2,-6 0,-6 m -5,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m -4,6 c 1,-1 2,-6 0,-6 m 31,1 c -0.0054,3.013212 -1.81361,5 -4.534024,5 H 21.423077 M 10,96 c 1,-1 3,-7 1,-7 m -6,2 c 0.00599,3.013212 2,5 5,5 H 31 M 39,6 c 1,1 1,4 0,4 M 35,6 c 1,1 1,4 0,4 M 31,6 c 1,1 1,4 0,4 M 27,6 c 1,1 1,4 0,4 M 23,6 c 1,1 1,4 0,4 M 19,6 c 1,1 1,4 0,4 M 15,6 c 1,1 1,4 0,4 m 30,1 C 44.99457,7.9867882 43.18639,6 40.465976,6 H 30 m 9,83 c 2,-1 4,1 6,2 v -3 m -5,-2 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-9 c 2,-1 3,0 5,1 v 4 m -5,-8 c 2,-1 3,-1 5,0 v 4 M 11,6 c 1,1 1,5 0,5 M 5,11 C 5.00599,7.9867882 7,6 10,6 H 30 M 11,89 C 9,88 7,90 5,91 v -3 m 5,-2 C 8,85 7,86 5,87 v 4 m 5,-9 C 8,81 7,82 5,83 v 4 m 5,-9 C 8,77 7,78 5,79 v 4 m 5,-9 C 8,73 7,74 5,75 v 4 m 5,-9 C 8,69 7,70 5,71 v 4 m 5,-9 C 8,65 7,66 5,67 v 4 m 5,-9 C 8,61 7,62 5,63 v 4 m 5,-9 C 8,57 7,58 5,59 v 4 m 5,-9 C 8,53 7,54 5,55 v 4 m 5,-9 C 8,49 7,50 5,51 v 4 m 5,-9 C 8,45 7,46 5,47 v 4 m 5,-9 C 8,41 7,42 5,43 v 4 m 5,-9 C 8,37 7,38 5,39 v 4 m 5,-9 C 8,33 7,34 5,35 v 4 m 5,-9 C 8,29 7,30 5,31 v 4 m 5,-9 C 8,25 7,26 5,27 v 4 m 5,-9 C 8,21 7,22 5,23 v 4 m 5,-9 C 8,17 7,18 5,19 v 4 m 5,-9 C 8,13 7,14 5,15 v 4 m 6,-8 C 9,10 7,10 5,11 v 4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccccccccccccsccccsccccccccccccccccscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
   </g>
